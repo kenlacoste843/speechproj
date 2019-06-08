@@ -31,9 +31,11 @@ export class SpeechlistComponent implements OnInit {
   ngOnInit() {
 
     this.columns = [
-      { flexGrow: 2, sortable: false, cellTemplate: this.colAction },
+      { flexGrow: 2, sortable: false, headerClass: 'cellBlock', cellClass: 'cellBlock', cellTemplate: this.colAction },
+      { flexGrow: 2, sortable: false, headerClass: 'visible-xs visible-sm', cellClass: 'visible-xs visible-sm' },
       { flexGrow: 1, name: 'No.', prop: 'id', headerClass: 'hidden-xs hidden-sm', cellClass: 'hidden-xs hidden-sm' },
       { flexGrow: 2, name: 'Title', prop: 'title' },
+      { flexGrow: 2, sortable: false, headerClass: 'visible-xs visible-sm', cellClass: 'visible-xs visible-sm' },
       { flexGrow: 2, name: 'Author', prop: 'author' },
       { flexGrow: 2, name: 'Email', prop: 'email', headerClass: 'hidden-xs hidden-sm', cellClass: 'hidden-xs hidden-sm' },
     ]
