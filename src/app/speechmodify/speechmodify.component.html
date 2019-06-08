@@ -9,28 +9,35 @@
     <div class="modal-body">
       <form [formGroup]="speechForm" (ngSubmit)="onSubmit(speechForm.value)">
         <div>
-          <label>Title:<span *ngIf="validate && speechForm.controls.title.errors" class="invalid-feedback">*</span></label>
+          <label>Title:<span *ngIf="validate && speechForm.controls.title.errors"
+              class="invalid-feedback">*</span></label>
           <input class="form-control" required type="text" formControlName="title" (focusout)="validate = true;" />
         </div>
         <div>
-          <label>Author:<span *ngIf="validate && speechForm.controls.author.errors" class="invalid-feedback">*</span></label>
+          <label>Author:<span *ngIf="validate && speechForm.controls.author.errors"
+              class="invalid-feedback">*</span></label>
           <input class="form-control" required type="text" formControlName="author" (focusout)="validate = true;" />
         </div>
         <div>
-          <label>Email:<span *ngIf="validate && speechForm.controls.email.errors && speechForm.controls.email.errors['required']" class="invalid-feedback">*</span></label>
+          <label>Email:<span
+              *ngIf="validate && speechForm.controls.email.errors && speechForm.controls.email.errors['required']"
+              class="invalid-feedback">*</span></label>
           <input class="form-control" required type="text" formControlName="email" (focusout)="validate = true;" />
         </div>
-        <div *ngIf="validate && speechForm.controls.email.errors && speechForm.controls.email.errors['pattern']" class="invalid-feedback" >
-            Use a valid email address.
+        <div *ngIf="validate && speechForm.controls.email.errors && speechForm.controls.email.errors['pattern']"
+          class="invalid-feedback">
+          Use a valid email address.
         </div>
         <div>
-          <label>Content:<span *ngIf="validate && speechForm.controls.content.errors" class="invalid-feedback">*</span></label>
-          <textarea class="form-control" style="height: 100px;" required formControlName="content" (focusout)="validate = true;" ></textarea>
+          <label>Content:<span *ngIf="validate && speechForm.controls.content.errors"
+              class="invalid-feedback">*</span></label>
+          <textarea class="form-control" style="height: 100px;" required formControlName="content"
+            (focusout)="validate = true;"></textarea>
         </div>
-        <hr />
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" formControlName="isActive" />
-          <label class="form-check-label">Is Active?</label>
+        <div>
+          <label>Date:</label>
+          <input type="text" formControlName="date" placeholder="Datepicker" class="form-control" bsDatepicker
+            [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'YYYY-MM-DD' }">
         </div>
         <hr />
         <button class="btn btn-success" type="submit" [disabled]="!speechForm.valid">Save</button>

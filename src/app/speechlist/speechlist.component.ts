@@ -8,6 +8,7 @@ import { SpeechmodifyComponent } from '../speechmodify/speechmodify.component';
 import { ConfirmComponent } from '../shared/modals/confirm/confirm.component';
 import { SharetomailComponent } from '../shared/modals/share-to-email/share-to-email.component';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-speechlist',
@@ -18,6 +19,7 @@ export class SpeechlistComponent implements OnInit {
 
   @ViewChild('table', null) table: any;
   @ViewChild('colAction', null) colAction: TemplateRef<any>;
+  @ViewChild('colDate', null) colDate: TemplateRef<any>;
 
   modalRef: BsModalRef;
   speechService: SpeechService;
@@ -30,7 +32,6 @@ export class SpeechlistComponent implements OnInit {
   }
 
   private refreshList() {
-    this.rows = this.speechList;
     this.rows = [...this.rows];
     this.table.offset = 0;
   }
@@ -39,16 +40,16 @@ export class SpeechlistComponent implements OnInit {
 
     this.columns = [
       { flexGrow: 2, sortable: false, headerClass: 'cellBlock', cellClass: 'cellBlock', cellTemplate: this.colAction },
-      { flexGrow: 2, sortable: false, headerClass: 'visible-xs visible-sm', cellClass: 'visible-xs visible-sm' },
-      { flexGrow: 1, name: 'No.', prop: 'id', headerClass: 'hidden-xs hidden-sm', cellClass: 'hidden-xs hidden-sm' },
+      { flexGrow: 1, name: 'No.', prop: 'id', headerClass: 'visible-lg visible-md', cellClass: 'visible-lg visible-md' },
       { flexGrow: 2, name: 'Title', prop: 'title' },
-      { flexGrow: 2, sortable: false, headerClass: 'visible-xs visible-sm', cellClass: 'visible-xs visible-sm' },
       { flexGrow: 2, name: 'Author', prop: 'author' },
-      { flexGrow: 2, name: 'Email', prop: 'email', headerClass: 'hidden-xs hidden-sm', cellClass: 'hidden-xs hidden-sm' },
+      { flexGrow: 2, name: 'Email', prop: 'email', headerClass: 'visible-lg visible-md', cellClass: 'visible-lg visible-md' },
+      { flexGrow: 1, name: 'Date', prop: 'date', cellTemplate: this.colDate },
     ]
 
     this.speechService.getSpeechList().subscribe((data) => {
       this.speechList = data;
+      this.rows = this.speechList;
       this.refreshList();
     });
   }
@@ -60,7 +61,7 @@ export class SpeechlistComponent implements OnInit {
         d.author && d.author.toString().indexOf(val) !== -1 ||
         d.email && d.email.toString().indexOf(val) !== -1 ||
         d.content && d.content.toString().indexOf(val) !== -1 ||
-        d.tags && d.tags.toString().indexOf(val) !== -1 ||
+        d.date && moment(d.date).format('YYYY-MM-DD').indexOf(val) !== -1 ||
         d.title && d.title.toString().indexOf(val) !== -1) || !val
         ;
     });
@@ -87,6 +88,7 @@ export class SpeechlistComponent implements OnInit {
     this.modalRef.content.onClose.subscribe((data) => {
       if (data.action) {
         this.speechList = data.speechList;
+        this.rows = this.speechList;
         this.refreshList();
         this.toastr.success('Add speech successful!');
       }
@@ -104,6 +106,7 @@ export class SpeechlistComponent implements OnInit {
     this.modalRef.content.onClose.subscribe((data) => {
       if (data.action) {
         this.speechList = data.speechList;
+        this.rows = this.speechList;
         this.refreshList();
         this.toastr.success('Edit speech successful!');
       }
@@ -115,6 +118,7 @@ export class SpeechlistComponent implements OnInit {
     this.modalRef.content.onClose.subscribe((data) => {
       if (data.action) {
         this.speechList = this.speechList.filter(_ => _ !== speechModel);
+        this.rows = this.speechList;
         this.refreshList();
         this.toastr.success('Delete speech successful!');
       }

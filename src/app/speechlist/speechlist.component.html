@@ -20,6 +20,10 @@
       </ngx-datatable>
     </div>
 
+    <ng-template #colDate let-row="row" ngx-datatable-cell-template>
+      <div>{{row.date | date: 'yyyy-MM-dd' }}</div>
+    </ng-template>
+
     <ng-template #colAction let-row="row" let-value="value" ngx-datatable-cell-template>
       <div class="dropdown" dropdown>
         <button dropdownToggle class="btn btn-default dropdown-toggle" type="button" id="dd-{{row.id}}"

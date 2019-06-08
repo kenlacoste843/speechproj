@@ -22,7 +22,7 @@ export class SpeechmodifyComponent implements OnInit {
       Validators.pattern(this.eJsRegx),
       Validators.required
     ])),
-    isActive: new FormControl(''),
+    date: new FormControl(''),
     content: new FormControl('', Validators.required)
   });
 
@@ -41,7 +41,7 @@ export class SpeechmodifyComponent implements OnInit {
       author: this.speech.author,
       email: this.speech.email,
       content: this.speech.content,
-      isActive: this.speech.isActive
+      date: this.speech.date
     });
   }
 
@@ -50,7 +50,7 @@ export class SpeechmodifyComponent implements OnInit {
     model.title = speechEntry.title;
     model.author = speechEntry.author;
     model.content = speechEntry.content;
-    model.isActive = speechEntry.isActive;
+    model.date = speechEntry.date ? speechEntry.date : new Date();
     model.email = speechEntry.email;
     model.id = model.id !== undefined ? model.id : undefined;
 
