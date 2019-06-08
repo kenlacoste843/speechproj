@@ -7,6 +7,7 @@ import { SpeechviewComponent } from '../speechview/speechview.component';
 import { SpeechmodifyComponent } from '../speechmodify/speechmodify.component';
 import { ConfirmComponent } from '../shared/modals/confirm/confirm.component';
 import { SharetomailComponent } from '../shared/modals/share-to-email/share-to-email.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-speechlist',
@@ -24,8 +25,14 @@ export class SpeechlistComponent implements OnInit {
   rows: SpeechModel[];
   columns: any[];
 
-  constructor(speechSvc: SpeechService, private bsModalSvc: BsModalService) {
+  constructor(speechSvc: SpeechService, private bsModalSvc: BsModalService, private toastr: ToastrService) {
     this.speechService = speechSvc;
+  }
+
+  private refreshList() {
+    this.rows = this.speechList;
+    this.rows = [...this.rows];
+    this.table.offset = 0;
   }
 
   ngOnInit() {
@@ -42,8 +49,7 @@ export class SpeechlistComponent implements OnInit {
 
     this.speechService.getSpeechList().subscribe((data) => {
       this.speechList = data;
-      this.rows = this.speechList;
-      this.table.offset = 0;
+      this.refreshList();
     });
   }
 
@@ -59,7 +65,7 @@ export class SpeechlistComponent implements OnInit {
         ;
     });
     this.rows = temp;
-    this.table.offset = 0;
+    this.refreshList();
   }
 
   viewSpeech(speechModel: SpeechModel) {
@@ -67,7 +73,6 @@ export class SpeechlistComponent implements OnInit {
       speech: speechModel,
       modal: true
     };
-
     this.modalRef = this.bsModalSvc.show(SpeechviewComponent, { initialState });
   }
 
@@ -82,8 +87,8 @@ export class SpeechlistComponent implements OnInit {
     this.modalRef.content.onClose.subscribe((data) => {
       if (data.action) {
         this.speechList = data.speechList;
-        this.rows = this.speechList;
-        this.table.offset = 0;
+        this.refreshList();
+        this.toastr.success('Add speech successful!');
       }
     });
   }
@@ -99,9 +104,8 @@ export class SpeechlistComponent implements OnInit {
     this.modalRef.content.onClose.subscribe((data) => {
       if (data.action) {
         this.speechList = data.speechList;
-        this.rows = this.speechList;
-
-        this.table.offset = 0;
+        this.refreshList();
+        this.toastr.success('Edit speech successful!');
       }
     });
   }
@@ -111,9 +115,8 @@ export class SpeechlistComponent implements OnInit {
     this.modalRef.content.onClose.subscribe((data) => {
       if (data.action) {
         this.speechList = this.speechList.filter(_ => _ !== speechModel);
-        this.rows = this.speechList;
-
-        this.table.offset = 0;
+        this.refreshList();
+        this.toastr.success('Delete speech successful!');
       }
     });
   }

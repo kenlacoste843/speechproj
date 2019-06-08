@@ -6,6 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxDatatableModule  } from '@swimlane/ngx-datatable';
+import { ToastrModule } from 'ngx-toastr';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -45,7 +46,8 @@ import { SpeechmodifyComponent } from './speechmodify/speechmodify.component';
     NgxDatatableModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   providers: [SpeechService],
   bootstrap: [AppComponent]
