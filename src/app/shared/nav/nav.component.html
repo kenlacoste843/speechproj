@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand navbar-default">
+    <div class="container">
+        <ul class="nav navbar-nav visible-xs visible-sm">
+            <li>
+                <a (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+                    <i class="glyphicon glyphicon-menu-hamburger"></i>
+                </a>
+            </li>
+        </ul>
+        <ul id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="nav navbar-nav">
+            <li *ngFor="let menu of menuList">
+                <a routerLink="{{menu.route}}">{{menu.name}}</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav hidden-xs hidden-sm">
+            <li *ngFor="let menu of menuList">
+                <a routerLink="{{menu.route}}">{{menu.name}}</a>
+            </li>
+        </ul>
+    </div>
+</nav>

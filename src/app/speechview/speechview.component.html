@@ -1,0 +1,31 @@
+<div *ngIf="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close pull-right" (click)="close()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 id="dialog-sizes-name1" class="modal-title text-center">{{speech.title}}</h4>
+      <div class="text-center" style="font-style: italic">
+        by: {{speech.author}}
+      </div>
+    </div>
+    <div class="modal-body">
+      {{speech.content}}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!modal" class="container">
+  <div class="row">
+    <div class="col-4 text-center">
+      {{speech.title}}
+    </div>
+    <div class="col-4 text-center font-small" style="font-style: italic">
+      by: {{speech.author}}
+    </div>
+    <hr />
+    <div class="col-6 center">
+      {{speech.content}}
+    </div>
+  </div>
+</div>
