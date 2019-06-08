@@ -1,4 +1,4 @@
-<div *ngIf="modal">
+<div>
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close pull-right" (click)="onExit()" aria-label="Close">
@@ -7,7 +7,7 @@
       <h4 [innerHtml]="!speech.id || speech.id === 0 ? 'New' : 'Edit'"></h4>
     </div>
     <div class="modal-body">
-      <form *ngIf="modal" [formGroup]="speechForm" (ngSubmit)="onSubmit(speechForm.value)">
+      <form [formGroup]="speechForm" (ngSubmit)="onSubmit(speechForm.value)">
         <div>
           <label>Title:<span *ngIf="validate && speechForm.controls.title.errors" class="invalid-feedback">*</span></label>
           <input class="form-control" required type="text" formControlName="title" (focusout)="validate = true;" />
