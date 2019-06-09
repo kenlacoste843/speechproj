@@ -6,6 +6,9 @@ export class SpeechModel {
     content: string;
     date: Date;
     
+    // extensions
+    showPop: false;
+
     constructor() {
         
     }

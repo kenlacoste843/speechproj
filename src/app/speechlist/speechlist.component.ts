@@ -39,12 +39,11 @@ export class SpeechlistComponent implements OnInit {
   ngOnInit() {
 
     this.columns = [
-      { flexGrow: 2, sortable: false, headerClass: 'cellBlock', cellClass: 'cellBlock', cellTemplate: this.colAction },
       { flexGrow: 1, name: 'No.', prop: 'id', headerClass: 'visible-lg visible-md', cellClass: 'visible-lg visible-md' },
       { flexGrow: 2, name: 'Title', prop: 'title' },
       { flexGrow: 2, name: 'Author', prop: 'author' },
-      { flexGrow: 2, name: 'Email', prop: 'email', headerClass: 'visible-lg visible-md', cellClass: 'visible-lg visible-md' },
-      { flexGrow: 1, name: 'Date', prop: 'date', cellTemplate: this.colDate },
+      { flexGrow: 2, name: 'Date', prop: 'date', cellTemplate: this.colDate },
+      { flexGrow: 1, sortable: false, cellTemplate: this.colAction },
     ]
 
     this.speechService.getSpeechList().subscribe((data) => {

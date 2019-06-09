@@ -15,7 +15,7 @@
   <hr />
   <div class="row">
     <div class="col lg-12">
-      <ngx-datatable #table class="material" [columns]="columns" [columnMode]="'flex'" [footerHeight]="50"
+      <ngx-datatable #table class="bootstrap" [columns]="columns" [columnMode]="'flex'" [footerHeight]="50"
         [rowHeight]="'auto'" [limit]="10" [rows]="rows">
       </ngx-datatable>
     </div>
@@ -25,66 +25,17 @@
     </ng-template>
 
     <ng-template #colAction let-row="row" let-value="value" ngx-datatable-cell-template>
-      <div class="dropdown" dropdown>
-        <button dropdownToggle class="btn btn-default dropdown-toggle" type="button" id="dd-{{row.id}}"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Action&nbsp;<i class="caret"></i>
-        </button>
-        <ul *dropdownMenu class="dropdown-menu" attr.aria-labelledby="dd-{{row.id}}">
-          <li role="presentation"><a role="menuitem" (click)="viewSpeech(row)">View</a></li>
-          <li role="presentation"><a role="menuitem" (click)="shareSpeech(row)">Share</a></li>
-          <li role="presentation"><a role="menuitem" (click)="editSpeech(row)">Edit</a></li>
-          <li role="presentation"><a role="menuitem" (click)="deleteSpeech(row)">Delete</a></li>
-        </ul>
+      <div class="w3-dropdown-click" (mouseleave)="row.showPop = false;">
+        <button (click)="row.showPop = true;" class="btn btn-primary btn-block">
+          <span class="hidden-xs">Action&nbsp;</span><i class="caret"></i></button>
+        <div class="w3-dropdown-content w3-bar-block popborder {{ row.showPop ? 'w3-show' : '' }} ">
+            <a [attr.href]="null" class="w3-bar-item item-btn" (click)="viewSpeech(row)">View</a>
+            <a [attr.href]="null" class="w3-bar-item item-btn" (click)="shareSpeech(row)">Share</a>
+            <a [attr.href]="null" class="w3-bar-item item-btn" (click)="editSpeech(row)">Edit</a>
+            <a [attr.href]="null" class="w3-bar-item item-btn" (click)="deleteSpeech(row)">Delete</a>
+        </div>
       </div>
     </ng-template>
 
-    <!-- 
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th scope="col">No.</th>
-          <th class="hidden-xs hidden-sm" scope="col">Is Active?</th>
-          <th scope="col">Author</th>
-          <th scope="col">Title</th>
-          <th class="hidden-xs hidden-sm" scope="col">Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let speech of rows">
-          <td>
-            <div class="dropdown" dropdown>
-              <button dropdownToggle class="btn btn-default dropdown-toggle" type="button" id="dd-{{speech.id}}"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Action&nbsp;<i class="caret"></i>
-              </button>
-              <ul *dropdownMenu class="dropdown-menu" attr.aria-labelledby="dd-{{speech.id}}">
-                <li role="presentation"><a role="menuitem" (click)="viewSpeech(speech)">View</a></li>
-                <li role="presentation"><a role="menuitem" (click)="shareSpeech(speech)">Share</a></li>
-                <li role="presentation"><a role="menuitem" (click)="editSpeech(speech)">Edit</a></li>
-                <li role="presentation"><a role="menuitem" (click)="deleteSpeech(speech)">Delete</a></li>
-              </ul>
-            </div>
-          </td>
-          <td>
-            {{speech.id}}
-          </td>
-          <td class="hidden-xs hidden-sm">
-            {{speech.isActive}}
-          </td>
-          <td>
-            {{speech.author}}
-          </td>
-          <td>
-            {{speech.title}}
-          </td>
-          <td class="hidden-xs hidden-sm">
-            {{speech.email}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-     -->
   </div>
 </div>
